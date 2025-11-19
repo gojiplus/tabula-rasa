@@ -52,14 +52,14 @@ pytest tests/ -v
 
 ```bash
 # Format code
-black src/ tests/
-isort src/ tests/
+black tabula_rasa/ tests/
+isort tabula_rasa/ tests/
 
 # Lint code
-ruff check src/ tests/
+ruff check tabula_rasa/ tests/
 
 # Type check
-mypy src/tabula_rasa
+mypy tabula_rasa
 ```
 
 5. **Commit your changes**

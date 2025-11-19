@@ -40,15 +40,15 @@ jobs:
 
       - name: Lint with ruff
         run: |
-          ruff check src/ tests/
+          ruff check tabula_rasa/ tests/
 
       - name: Check formatting with black
         run: |
-          black --check src/ tests/
+          black --check tabula_rasa/ tests/
 
       - name: Type check with mypy
         run: |
-          mypy src/tabula_rasa
+          mypy tabula_rasa
         continue-on-error: true
 
       - name: Run tests
@@ -78,9 +78,9 @@ jobs:
           pip install ruff black isort
 
       - name: Lint with ruff
-        run: ruff check src/ tests/
+        run: ruff check tabula_rasa/ tests/
 
       - name: Check formatting
         run: |
-          black --check src/ tests/
-          isort --check-only src/ tests/
+          black --check tabula_rasa/ tests/
+          isort --check-only tabula_rasa/ tests/
