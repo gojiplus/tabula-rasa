@@ -1,7 +1,5 @@
 """Production Table QA model with T5 backbone."""
 
-from typing import Dict
-
 import torch
 import torch.nn as nn
 from transformers import T5EncoderModel, T5Tokenizer
@@ -65,8 +63,8 @@ class ProductionTableQA(nn.Module):
         )
 
     def forward(
-        self, question: str, sketch: Dict, return_features: bool = False
-    ) -> Dict[str, torch.Tensor]:
+        self, question: str, sketch: dict, return_features: bool = False
+    ) -> dict[str, torch.Tensor]:
         """
         Forward pass.
 

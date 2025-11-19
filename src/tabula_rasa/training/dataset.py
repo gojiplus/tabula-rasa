@@ -1,7 +1,5 @@
 """Dataset generation for table QA training."""
 
-from typing import Dict, List, Tuple
-
 import numpy as np
 import pandas as pd
 from torch.utils.data import Dataset
@@ -12,7 +10,7 @@ from ..core.executor import AdvancedQueryExecutor, Query
 class TableQADataset(Dataset):
     """Dataset for table QA with synthetic query generation."""
 
-    def __init__(self, df: pd.DataFrame, sketch: Dict, n_samples: int = 1000):
+    def __init__(self, df: pd.DataFrame, sketch: dict, n_samples: int = 1000):
         """
         Initialize dataset with synthetic query generation.
 
@@ -26,7 +24,7 @@ class TableQADataset(Dataset):
         self.executor = AdvancedQueryExecutor(df)
         self.samples = self._generate_samples(n_samples)
 
-    def _generate_samples(self, n_samples: int) -> List[Tuple]:
+    def _generate_samples(self, n_samples: int) -> list[tuple]:
         """Generate diverse training samples."""
         samples = []
         numeric_cols = [
@@ -149,7 +147,7 @@ class TableQADataset(Dataset):
         """Return number of samples."""
         return len(self.samples)
 
-    def __getitem__(self, idx: int) -> Dict:
+    def __getitem__(self, idx: int) -> dict:
         """Get a single sample."""
         question, answer, query_type = self.samples[idx]
 
