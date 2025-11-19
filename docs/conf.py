@@ -5,7 +5,7 @@ import sys
 from datetime import datetime
 
 # Add the project root to the path
-sys.path.insert(0, os.path.abspath("../src"))
+sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 project = "Tabula Rasa"

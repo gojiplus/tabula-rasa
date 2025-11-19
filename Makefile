@@ -13,15 +13,15 @@ test:  ## Run tests with pytest
 	pytest tests/ -v --cov=tabula_rasa --cov-report=term-missing
 
 lint:  ## Run linting with ruff
-	ruff check src/ tests/
+	ruff check tabula_rasa/ tests/
 
 format:  ## Format code with black and ruff
-	ruff check --fix src/ tests/
-	black src/ tests/
-	isort src/ tests/
+	ruff check --fix tabula_rasa/ tests/
+	black tabula_rasa/ tests/
+	isort tabula_rasa/ tests/
 
 type-check:  ## Run type checking with mypy
-	mypy src/tabula_rasa
+	mypy tabula_rasa
 
 pre-commit-install:  ## Install pre-commit hooks
 	pre-commit install

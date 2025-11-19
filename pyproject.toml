@@ -77,11 +77,7 @@ Repository = "https://github.com/gojiplus/tabula-rasa"
 [project.scripts]
 tabula-rasa = "tabula_rasa.cli.main:cli"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
-
 [tool.setuptools.packages.find]
-where = ["src"]
 include = ["tabula_rasa*"]
 
 [tool.black]
@@ -163,7 +159,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 minversion = "7.0"
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["."]
 addopts = [
     "-ra",
     "--strict-markers",
@@ -179,7 +175,7 @@ filterwarnings = [
 ]
 
 [tool.coverage.run]
-source = ["src"]
+source = ["tabula_rasa"]
 omit = [
     "*/tests/*",
     "*/__init__.py",

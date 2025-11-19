@@ -371,7 +371,7 @@ MIT License - see LICENSE file for details
 
 ```
 tabula-rasa/
-├── src/tabula_rasa/        # Main package
+├── tabula_rasa/            # Main package
 │   ├── core/               # Core components (sketch, executor)
 │   ├── models/             # Neural models
 │   ├── training/           # Training pipeline
