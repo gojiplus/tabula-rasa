@@ -2,7 +2,7 @@
 
 import re
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Any
 
 import pandas as pd
 
@@ -12,11 +12,11 @@ class Query:
     """Structured query representation."""
 
     query_type: str  # 'aggregate', 'filter', 'conditional', 'join'
-    target_column: Optional[str] = None
-    aggregation: Optional[str] = None  # 'mean', 'sum', 'count', 'std', 'percentile'
-    condition: Optional[str] = None
-    percentile: Optional[float] = None
-    group_by: Optional[str] = None
+    target_column: str | None = None
+    aggregation: str | None = None  # 'mean', 'sum', 'count', 'std', 'percentile'
+    condition: str | None = None
+    percentile: float | None = None
+    group_by: str | None = None
 
 
 class AdvancedQueryExecutor:
@@ -102,7 +102,7 @@ class AdvancedQueryExecutor:
         mask = self._parse_condition(query.condition)
         return int(mask.sum())
 
-    def _execute_group_by(self, query: Query) -> Dict:
+    def _execute_group_by(self, query: Query) -> dict:
         """Execute group-by aggregation."""
         grouped = self.df.groupby(query.group_by)[query.target_column]
 

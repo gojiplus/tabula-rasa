@@ -1,7 +1,5 @@
 """Neural encoders for statistical sketches and text."""
 
-from typing import Dict
-
 import torch
 import torch.nn as nn
 
@@ -48,7 +46,7 @@ class StatisticalEncoder(nn.Module):
             nn.Linear(output_dim, output_dim),
         )
 
-    def forward(self, sketch: Dict) -> torch.Tensor:
+    def forward(self, sketch: dict) -> torch.Tensor:
         """
         Encode sketch to fixed-size vector.
 

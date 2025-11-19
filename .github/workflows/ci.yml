@@ -12,13 +12,17 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.11", "3.12", "3.13"]
         exclude:
-          # Reduce matrix size
+          # Test all versions on Linux, only 3.11 on macOS/Windows
           - os: macos-latest
-            python-version: "3.8"
+            python-version: "3.12"
+          - os: macos-latest
+            python-version: "3.13"
           - os: windows-latest
-            python-version: "3.8"
+            python-version: "3.12"
+          - os: windows-latest
+            python-version: "3.13"
 
     steps:
       - uses: actions/checkout@v4
@@ -53,7 +57,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
         with:
           file: ./coverage.xml
           fail_ci_if_error: false
@@ -66,7 +70,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |

@@ -1,7 +1,5 @@
 """Production training pipeline with best practices."""
 
-from typing import Dict, Tuple
-
 import numpy as np
 import pandas as pd
 import torch
@@ -19,7 +17,7 @@ class ProductionTrainer:
         self,
         model: ProductionTableQA,
         df: pd.DataFrame,
-        sketch: Dict,
+        sketch: dict,
         lr: float = 1e-4,
         batch_size: int = 16,
         device: str = "cpu",
@@ -56,7 +54,7 @@ class ProductionTrainer:
 
     def train(
         self, n_epochs: int = 10, n_train_samples: int = 1000, n_val_samples: int = 200
-    ) -> Tuple[float, Dict]:
+    ) -> tuple[float, dict]:
         """
         Training loop with validation.
 
@@ -179,7 +177,7 @@ class ProductionTrainer:
 
         return total_loss / max(len(dataloader), 1)
 
-    def _validate(self, dataloader: DataLoader) -> Tuple[float, Dict]:
+    def _validate(self, dataloader: DataLoader) -> tuple[float, dict]:
         """Validation."""
         self.model.eval()
         total_loss = 0

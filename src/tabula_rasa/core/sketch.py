@@ -1,7 +1,5 @@
 """Statistical sketch extraction for compact table representation."""
 
-from typing import Dict
-
 import numpy as np
 import pandas as pd
 from scipy.stats import rankdata, norm, spearmanr
@@ -28,7 +26,7 @@ class AdvancedStatSketch:
         self.max_cats = max_categories
         self.confidence = confidence_level
 
-    def extract(self, df: pd.DataFrame, table_name: str = "table") -> Dict:
+    def extract(self, df: pd.DataFrame, table_name: str = "table") -> dict:
         """
         Extract comprehensive statistical sketch from a DataFrame.
 
@@ -73,14 +71,14 @@ class AdvancedStatSketch:
 
         return sketch
 
-    def _extract_column_stats(self, series: pd.Series, col_name: str) -> Dict:
+    def _extract_column_stats(self, series: pd.Series, col_name: str) -> dict:
         """Extract rich column statistics."""
         if pd.api.types.is_numeric_dtype(series):
             return self._numeric_column_stats(series)
         else:
             return self._categorical_column_stats(series)
 
-    def _numeric_column_stats(self, series: pd.Series) -> Dict:
+    def _numeric_column_stats(self, series: pd.Series) -> dict:
         """Comprehensive numeric column statistics."""
         clean = series.dropna()
 
@@ -118,7 +116,7 @@ class AdvancedStatSketch:
 
         return stats
 
-    def _categorical_column_stats(self, series: pd.Series) -> Dict:
+    def _categorical_column_stats(self, series: pd.Series) -> dict:
         """Comprehensive categorical statistics."""
         value_counts = series.value_counts()
         total = len(series)
@@ -173,7 +171,7 @@ class AdvancedStatSketch:
         else:
             return "unknown"
 
-    def _compute_robust_correlations(self, df: pd.DataFrame) -> Dict:
+    def _compute_robust_correlations(self, df: pd.DataFrame) -> dict:
         """Compute multiple correlation measures."""
         correlations = {}
         cols = df.columns
@@ -203,7 +201,7 @@ class AdvancedStatSketch:
 
         return correlations
 
-    def _fit_gaussian_copula(self, df: pd.DataFrame) -> Dict:
+    def _fit_gaussian_copula(self, df: pd.DataFrame) -> dict:
         """
         Fit Gaussian copula - captures dependency structure.
 
@@ -237,7 +235,7 @@ class AdvancedStatSketch:
             "condition_number": float(eigenvalues.max() / (eigenvalues.min() + 1e-10)),
         }
 
-    def _estimate_mutual_information(self, df: pd.DataFrame) -> Dict:
+    def _estimate_mutual_information(self, df: pd.DataFrame) -> dict:
         """Estimate mutual information (captures non-linear dependencies)."""
         mi_scores = {}
 
@@ -286,7 +284,7 @@ class AdvancedStatSketch:
         except Exception:
             return 0.0
 
-    def _extract_conditional_patterns(self, df: pd.DataFrame) -> Dict:
+    def _extract_conditional_patterns(self, df: pd.DataFrame) -> dict:
         """Extract patterns for conditional queries (e.g., mean of X given Y > threshold)."""
         patterns = {}
 
