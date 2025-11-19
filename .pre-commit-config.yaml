@@ -33,3 +33,13 @@ repos:
       - id: mypy
         additional_dependencies: [types-all]
         args: [--ignore-missing-imports]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: [--tb=short, -v]
