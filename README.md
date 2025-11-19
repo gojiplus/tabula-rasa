@@ -160,14 +160,17 @@ This demonstrates:
 Tabula Rasa provides a command-line interface for common tasks:
 
 ```bash
-# Analyze a CSV file
+# Analyze a CSV file and show statistical sketch
 tabula-rasa analyze data.csv
 
 # Train a model
 tabula-rasa train data.csv --epochs 10 --output model.pt
 
-# Run inference
+# Run inference with a trained model
 tabula-rasa inference model.pt data.csv "What is the average price?"
+
+# Execute a query directly on a CSV file (without training)
+tabula-rasa query data.csv "What is the average price?"
 ```
 
 ### Python API
@@ -179,6 +182,8 @@ from tabula_rasa import (
     ProductionTrainer,
     AdvancedQueryExecutor,
     Query,
+    StatisticalEncoder,
+    TableQADataset,
 )
 import pandas as pd
 
@@ -352,7 +357,7 @@ If you use this code in your research, please cite:
 ```bibtex
 @software{tabula_rasa_2024,
   title={Production Table Knowledge LLM},
-  author={Your Name},
+  author={Tabula Rasa Contributors},
   year={2024},
   url={https://github.com/gojiplus/tabula-rasa}
 }
@@ -396,8 +401,7 @@ Quick start:
 ## Contact
 
 For questions or feedback:
-- Open an issue on GitHub
-- Email: your.email@example.com
+- Open an issue on [GitHub](https://github.com/gojiplus/tabula-rasa/issues)
 
 ---
 
