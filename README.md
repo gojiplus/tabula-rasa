@@ -1,5 +1,11 @@
 # Production Table Knowledge LLM
 
+[![CI](https://github.com/gojiplus/tabula-rasa/actions/workflows/ci.yml/badge.svg)](https://github.com/gojiplus/tabula-rasa/actions/workflows/ci.yml)
+[![PyPI version](https://badge.fury.io/py/tabula-rasa.svg)](https://badge.fury.io/py/tabula-rasa)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 ## Overview
 
 This project teaches language models to accurately answer questions about tabular data. The core challenge is that large tables cannot fit into an LLM's context window, yet we need the model to provide precise, numerical answers without hallucinating. This system solves that problem through a combination of data compression, statistical modeling, and grounded learning.
@@ -102,13 +108,34 @@ The multi-task learning helps the model learn robust representations.
 
 ## Installation
 
+### From PyPI (recommended)
+
+```bash
+pip install tabula-rasa
+```
+
+### From source
+
 ```bash
 # Clone the repository
 git clone https://github.com/gojiplus/tabula-rasa.git
 cd tabula-rasa
 
-# Install dependencies
-pip install -r requirements.txt
+# Install in development mode
+pip install -e ".[dev]"
+```
+
+### Optional dependencies
+
+```bash
+# For Jupyter notebooks and visualization
+pip install tabula-rasa[notebooks]
+
+# For building documentation
+pip install tabula-rasa[docs]
+
+# Install all optional dependencies
+pip install tabula-rasa[all]
 ```
 
 ## Quick Start
@@ -118,7 +145,7 @@ pip install -r requirements.txt
 Run the comprehensive demo notebook to see the system in action:
 
 ```bash
-jupyter notebook demo_multiple_datasets.ipynb
+jupyter notebook examples/notebooks/demo_multiple_datasets.ipynb
 ```
 
 This demonstrates:
@@ -128,15 +155,30 @@ This demonstrates:
 - Evaluation on diverse query types
 - Performance comparison across datasets
 
-### Using Programmatically
+### CLI Usage
+
+Tabula Rasa provides a command-line interface for common tasks:
+
+```bash
+# Analyze a CSV file
+tabula-rasa analyze data.csv
+
+# Train a model
+tabula-rasa train data.csv --epochs 10 --output model.pt
+
+# Run inference
+tabula-rasa inference model.pt data.csv "What is the average price?"
+```
+
+### Python API
 
 ```python
-from production_table_llm import (
+from tabula_rasa import (
     AdvancedStatSketch,
     ProductionTableQA,
     ProductionTrainer,
     AdvancedQueryExecutor,
-    Query
+    Query,
 )
 import pandas as pd
 
@@ -320,13 +362,36 @@ If you use this code in your research, please cite:
 
 MIT License - see LICENSE file for details
 
+## Package Structure
+
+```
+tabula-rasa/
+├── src/tabula_rasa/        # Main package
+│   ├── core/               # Core components (sketch, executor)
+│   ├── models/             # Neural models
+│   ├── training/           # Training pipeline
+│   ├── utils/              # Utilities
+│   └── cli/                # Command-line interface
+├── tests/                  # Comprehensive test suite
+├── examples/               # Usage examples
+│   ├── basic_usage.py
+│   ├── custom_dataset.py
+│   └── notebooks/          # Jupyter notebooks
+└── docs/                   # Documentation
+```
+
 ## Contributing
 
-Contributions welcome! Please:
+Contributions welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+Quick start:
 1. Fork the repository
 2. Create a feature branch
-3. Add tests for new functionality
-4. Submit a pull request
+3. Install development dependencies: `pip install -e ".[dev]"`
+4. Install pre-commit hooks: `pre-commit install`
+5. Add tests for new functionality
+6. Run tests: `pytest tests/`
+7. Submit a pull request
 
 ## Contact
 
