@@ -1,5 +1,7 @@
 """Main CLI entry point."""
 
+from importlib.metadata import version
+
 import click
 import pandas as pd
 import torch
@@ -10,11 +12,10 @@ from .. import (
     ProductionTableQA,
     ProductionTrainer,
 )
-from ..__version__ import __version__
 
 
 @click.group()
-@click.version_option(version=__version__)
+@click.version_option(version=version("tabula-rasa"))
 def cli():
     """Tabula Rasa: Production Table Knowledge LLM."""
     pass
