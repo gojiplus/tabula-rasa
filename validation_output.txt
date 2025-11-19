@@ -1,0 +1,159 @@
+============================================================
+Tabula Rasa Query Accuracy Validation
+============================================================
+Started at: 2025-11-19T00:37:17.520885
+
+============================================================
+Validating on Wine dataset
+============================================================
+Dataset shape: (178, 14)
+Columns: ['alcohol', 'malic_acid', 'ash', 'alcalinity_of_ash', 'magnesium', 'total_phenols', 'flavanoids', 'nonflavanoid_phenols', 'proanthocyanins', 'color_intensity', 'hue', 'od280/od315_of_diluted_wines', 'proline', 'target']
+
+Extracting statistical sketch...
+  Extracted 14 columns
+
+Initializing model...
+ERROR validating Wine: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+Traceback (most recent call last):
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 265, in main
+    metrics = validate_dataset(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 172, in validate_dataset
+    model = ProductionTableQA(model_name='t5-small', stat_dim=512)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/production_table_llm.py", line 518, in __init__
+    self.tokenizer = T5Tokenizer.from_pretrained(model_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2157, in __getattribute__
+    requires_backends(cls, cls._backends)
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2143, in requires_backends
+    raise ImportError("".join(failed))
+ImportError: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+
+============================================================
+Validating on Diabetes dataset
+============================================================
+Dataset shape: (442, 11)
+Columns: ['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6', 'target']
+
+Extracting statistical sketch...
+  Extracted 11 columns
+
+Initializing model...
+ERROR validating Diabetes: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+Traceback (most recent call last):
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 265, in main
+    metrics = validate_dataset(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 172, in validate_dataset
+    model = ProductionTableQA(model_name='t5-small', stat_dim=512)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/production_table_llm.py", line 518, in __init__
+    self.tokenizer = T5Tokenizer.from_pretrained(model_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2157, in __getattribute__
+    requires_backends(cls, cls._backends)
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2143, in requires_backends
+    raise ImportError("".join(failed))
+ImportError: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+
+============================================================
+Validating on Housing dataset
+============================================================
+Dataset shape: (20640, 9)
+Columns: ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup', 'Latitude', 'Longitude', 'MedHouseVal']
+
+Extracting statistical sketch...
+  Extracted 9 columns
+
+Initializing model...
+ERROR validating Housing: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+Traceback (most recent call last):
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 265, in main
+    metrics = validate_dataset(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 172, in validate_dataset
+    model = ProductionTableQA(model_name='t5-small', stat_dim=512)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/production_table_llm.py", line 518, in __init__
+    self.tokenizer = T5Tokenizer.from_pretrained(model_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2157, in __getattribute__
+    requires_backends(cls, cls._backends)
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2143, in requires_backends
+    raise ImportError("".join(failed))
+ImportError: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+
+============================================================
+Validating on Cancer dataset
+============================================================
+Dataset shape: (569, 31)
+Columns: ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness', 'mean compactness', 'mean concavity', 'mean concave points', 'mean symmetry', 'mean fractal dimension', 'radius error', 'texture error', 'perimeter error', 'area error', 'smoothness error', 'compactness error', 'concavity error', 'concave points error', 'symmetry error', 'fractal dimension error', 'worst radius', 'worst texture', 'worst perimeter', 'worst area', 'worst smoothness', 'worst compactness', 'worst concavity', 'worst concave points', 'worst symmetry', 'worst fractal dimension', 'target']
+
+Extracting statistical sketch...
+  Extracted 31 columns
+
+Initializing model...
+ERROR validating Cancer: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+Traceback (most recent call last):
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 265, in main
+    metrics = validate_dataset(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/validate_query_accuracy.py", line 172, in validate_dataset
+    model = ProductionTableQA(model_name='t5-small', stat_dim=512)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/tabula-rasa/production_table_llm.py", line 518, in __init__
+    self.tokenizer = T5Tokenizer.from_pretrained(model_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2157, in __getattribute__
+    requires_backends(cls, cls._backends)
+  File "/usr/local/lib/python3.11/dist-packages/transformers/utils/import_utils.py", line 2143, in requires_backends
+    raise ImportError("".join(failed))
+ImportError: 
+T5Tokenizer requires the SentencePiece library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/google/sentencepiece#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+
+============================================================
+Validation complete! Results saved to validation_results.json
+============================================================
+
+============================================================
+VALIDATION SUMMARY
+============================================================
+
+Dataset      Mean Err %   Median Err %   Val MAE    N Queries   
+------------------------------------------------------------
+
+============================================================
+Completed at: 2025-11-19T00:37:29.229172
+============================================================
