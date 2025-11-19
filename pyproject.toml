@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Production Table Knowledge LLM: Teaching LLMs to accurately answer questions about tabular data"
 readme = "README.md"
 authors = [
-    {name = "Tabula Rasa Contributors", email = "your.email@example.com"}
+    {name = "Tabula Rasa Contributors"}
 ]
 license = {text = "MIT"}
 keywords = ["llm", "table", "qa", "machine-learning", "transformer", "t5"]
