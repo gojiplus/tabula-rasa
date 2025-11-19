@@ -127,18 +127,14 @@ class ProductionTrainer:
                 output = self.model(q, self.sketch)
 
                 # Convert tensor to float if needed
-                true_ans_val = (
-                    true_ans.item() if torch.is_tensor(true_ans) else float(true_ans)
-                )
+                true_ans_val = true_ans.item() if torch.is_tensor(true_ans) else float(true_ans)
 
                 # Skip if answer is invalid
                 if np.isnan(true_ans_val) or np.isinf(true_ans_val):
                     continue
 
                 # Answer loss (MSE) with normalization
-                true_ans_tensor = torch.tensor(true_ans_val, dtype=torch.float32).to(
-                    self.device
-                )
+                true_ans_tensor = torch.tensor(true_ans_val, dtype=torch.float32).to(self.device)
                 answer_loss = F.mse_loss(output["answer"], true_ans_tensor) / (
                     abs(true_ans_val) + 1.0
                 )
@@ -194,9 +190,7 @@ class ProductionTrainer:
 
                 for q, true_ans, qt in zip(questions, true_answers, query_types):
                     # Convert tensor to float if needed
-                    true_ans_val = (
-                        true_ans.item() if torch.is_tensor(true_ans) else float(true_ans)
-                    )
+                    true_ans_val = true_ans.item() if torch.is_tensor(true_ans) else float(true_ans)
 
                     # Skip invalid answers
                     if np.isnan(true_ans_val) or np.isinf(true_ans_val):

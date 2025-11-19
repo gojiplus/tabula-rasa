@@ -61,9 +61,7 @@ class TableQADataset(Dataset):
                     continue
 
                 target_col = np.random.choice(numeric_cols)
-                condition_col = np.random.choice(
-                    [c for c in numeric_cols if c != target_col]
-                )
+                condition_col = np.random.choice([c for c in numeric_cols if c != target_col])
                 agg = np.random.choice(["mean", "count", "std"])
 
                 # Random threshold
@@ -104,7 +102,7 @@ class TableQADataset(Dataset):
 
         return samples
 
-    def _format_question(self, query_type: str, col: str, agg: str) -> str:
+    def _format_question(self, _query_type: str, col: str, agg: str) -> str:
         """Format natural language question."""
         templates = {
             "mean": [
@@ -125,8 +123,8 @@ class TableQADataset(Dataset):
                 f"What is the largest value of {col}?",
             ],
             "count": [
-                f"How many rows are there?",
-                f"What is the total number of rows?",
+                "How many rows are there?",
+                "What is the total number of rows?",
             ],
         }
 
@@ -134,14 +132,12 @@ class TableQADataset(Dataset):
 
     def _format_conditional_question(self, target: str, condition: str, agg: str) -> str:
         """Format conditional question."""
-        if agg == "mean":
-            return f"What is the average {target} when {condition}?"
-        elif agg == "count":
-            return f"How many rows have {condition}?"
-        elif agg == "std":
-            return f"What is the standard deviation of {target} when {condition}?"
-        else:
-            return f"What is the {agg} of {target} when {condition}?"
+        templates = {
+            "mean": f"What is the average {target} when {condition}?",
+            "count": f"How many rows have {condition}?",
+            "std": f"What is the standard deviation of {target} when {condition}?",
+        }
+        return templates.get(agg, f"What is the {agg} of {target} when {condition}?")
 
     def __len__(self) -> int:
         """Return number of samples."""
