@@ -5,11 +5,9 @@ import pandas as pd
 import torch
 
 from .. import (
-    AdvancedQueryExecutor,
     AdvancedStatSketch,
     ProductionTableQA,
     ProductionTrainer,
-    Query,
 )
 from ..__version__ import __version__
 
@@ -52,14 +50,18 @@ def train(data_path, model_name, epochs, train_samples, val_samples, batch_size,
         n_epochs=epochs, n_train_samples=train_samples, n_val_samples=val_samples
     )
 
-    click.echo(f"\nTraining complete!")
+    click.echo("\nTraining complete!")
     click.echo(f"Best validation loss: {best_loss:.4f}")
     click.echo(f"Final MAE: {history['val_mae'][-1]:.4f}")
     click.echo(f"Final MAPE: {history['val_mape'][-1]:.2%}")
 
     click.echo(f"\nSaving model to {output}...")
     torch.save(
-        {"model_state_dict": model.state_dict(), "sketch": sketch, "config": {"model_name": model_name}},
+        {
+            "model_state_dict": model.state_dict(),
+            "sketch": sketch,
+            "config": {"model_name": model_name},
+        },
         output,
     )
     click.echo("Done!")
@@ -70,19 +72,11 @@ def train(data_path, model_name, epochs, train_samples, val_samples, batch_size,
 @click.argument("question")
 def query(data_path, question):
     """Execute a query on a CSV file (without training)."""
-    click.echo(f"Loading data from {data_path}...")
-    df = pd.read_csv(data_path)
-
-    click.echo("Extracting statistical sketch...")
-    sketcher = AdvancedStatSketch()
-    sketch = sketcher.extract(df, table_name="table")
-
-    # For simple queries, try to execute directly
-    executor = AdvancedQueryExecutor(df)
-
-    click.echo(f"\nQuestion: {question}")
+    click.echo(f"Data path: {data_path}")
+    click.echo(f"Question: {question}")
     click.echo(
-        "Note: This is a direct execution. For ML-based inference, train a model first."
+        "\nNote: This command is not yet fully implemented. "
+        "For ML-based inference, train a model first using 'train' and then use 'inference'."
     )
 
 
@@ -90,14 +84,12 @@ def query(data_path, question):
 @click.argument("model_path", type=click.Path(exists=True))
 @click.argument("data_path", type=click.Path(exists=True))
 @click.argument("question")
-def inference(model_path, data_path, question):
+def inference(model_path, _data_path, question):
     """Run inference with a trained model."""
     click.echo(f"Loading model from {model_path}...")
     checkpoint = torch.load(model_path, map_location="cpu")
 
-    model = ProductionTableQA(
-        model_name=checkpoint["config"]["model_name"], stat_dim=768
-    )
+    model = ProductionTableQA(model_name=checkpoint["config"]["model_name"], stat_dim=768)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
 
@@ -146,9 +138,7 @@ def analyze(data_path):
         click.echo("\n=== Strong Correlations ===")
         for pair, corr_data in list(sketch["correlations"].items())[:5]:
             col1, col2 = pair.split("|")
-            click.echo(
-                f"{col1} <-> {col2}: {corr_data['spearman']:.2f} ({corr_data['strength']})"
-            )
+            click.echo(f"{col1} <-> {col2}: {corr_data['spearman']:.2f} ({corr_data['strength']})")
 
 
 if __name__ == "__main__":

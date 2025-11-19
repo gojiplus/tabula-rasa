@@ -35,9 +35,7 @@ class StatisticalEncoder(nn.Module):
         )
 
         # Attention pooling over columns
-        self.attention = nn.MultiheadAttention(
-            output_dim, num_heads=8, batch_first=True
-        )
+        self.attention = nn.MultiheadAttention(output_dim, num_heads=8, batch_first=True)
 
         # Global table encoder
         self.table_encoder = nn.Sequential(
@@ -61,7 +59,7 @@ class StatisticalEncoder(nn.Module):
         column_embeddings = []
 
         # Encode each numeric column
-        for col_name, col_stats in sketch["columns"].items():
+        for _col_name, col_stats in sketch["columns"].items():
             if col_stats["type"] == "numeric" and "error" not in col_stats:
                 # Pack statistics into feature vector
                 features = torch.tensor(

@@ -1,7 +1,6 @@
 """Tests for query executor."""
 
 import numpy as np
-import pandas as pd
 import pytest
 
 from tabula_rasa import AdvancedQueryExecutor, Query
@@ -100,9 +99,7 @@ class TestAdvancedQueryExecutor:
     def test_invalid_aggregation(self, sample_dataframe):
         """Test handling of invalid aggregation."""
         executor = AdvancedQueryExecutor(sample_dataframe)
-        query = Query(
-            query_type="aggregate", target_column="price", aggregation="invalid_agg"
-        )
+        query = Query(query_type="aggregate", target_column="price", aggregation="invalid_agg")
 
         with pytest.raises(ValueError):
             executor.execute(query)
