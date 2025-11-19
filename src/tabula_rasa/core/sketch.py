@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-from scipy.stats import rankdata, norm, spearmanr
+from scipy.stats import norm, rankdata, spearmanr
 from sklearn.covariance import LedoitWolf
 
 
@@ -71,7 +71,7 @@ class AdvancedStatSketch:
 
         return sketch
 
-    def _extract_column_stats(self, series: pd.Series, col_name: str) -> dict:
+    def _extract_column_stats(self, series: pd.Series, _col_name: str) -> dict:
         """Extract rich column statistics."""
         if pd.api.types.is_numeric_dtype(series):
             return self._numeric_column_stats(series)
@@ -145,8 +145,7 @@ class AdvancedStatSketch:
         n = len(sorted_counts)
         cumsum = np.cumsum(sorted_counts)
         stats["gini"] = float(
-            (2 * np.sum((np.arange(1, n + 1)) * sorted_counts)) / (n * cumsum[-1])
-            - (n + 1) / n
+            (2 * np.sum((np.arange(1, n + 1)) * sorted_counts)) / (n * cumsum[-1]) - (n + 1) / n
         )
 
         return stats
@@ -208,9 +207,7 @@ class AdvancedStatSketch:
         Key insight: Copula separates margins from dependence
         """
         # Step 1: Rank-transform to uniform [0,1]
-        uniform_data = df.apply(
-            lambda x: rankdata(x, nan_policy="omit") / (len(x.dropna()) + 1)
-        )
+        uniform_data = df.apply(lambda x: rankdata(x, nan_policy="omit") / (len(x.dropna()) + 1))
 
         # Step 2: Transform to standard normal via inverse CDF
         normal_data = uniform_data.apply(lambda x: norm.ppf(np.clip(x, 0.001, 0.999)))
@@ -246,17 +243,13 @@ class AdvancedStatSketch:
                     continue
 
                 # Bin data and compute empirical MI
-                mi = self._compute_mi_continuous(
-                    clean_data[col1].values, clean_data[col2].values
-                )
+                mi = self._compute_mi_continuous(clean_data[col1].values, clean_data[col2].values)
                 if mi > 0.1:
                     mi_scores[f"{col1}|{col2}"] = float(mi)
 
         return mi_scores
 
-    def _compute_mi_continuous(
-        self, x: np.ndarray, y: np.ndarray, bins: int = 10
-    ) -> float:
+    def _compute_mi_continuous(self, x: np.ndarray, y: np.ndarray, bins: int = 10) -> float:
         """Compute mutual information for continuous variables."""
         try:
             # Discretize via equal-frequency binning
