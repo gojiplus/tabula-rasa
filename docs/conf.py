@@ -7,11 +7,24 @@ from datetime import datetime
 # Add the project root to the path
 sys.path.insert(0, os.path.abspath(".."))
 
+# Import version dynamically
+try:
+    from importlib.metadata import metadata
+
+    pkg_metadata = metadata("tabula-rasa")
+    release = pkg_metadata["Version"]
+    project_name = pkg_metadata["Name"].replace("-", " ").title()
+    author_info = pkg_metadata.get("Author", "Tabula Rasa Contributors")
+except ImportError:
+    # Fallback for development
+    release = "0.1.0"
+    project_name = "Tabula Rasa"
+    author_info = "Tabula Rasa Contributors"
+
 # -- Project information -----------------------------------------------------
-project = "Tabula Rasa"
-copyright = f"{datetime.now().year}, Tabula Rasa Contributors"
-author = "Tabula Rasa Contributors"
-release = "0.1.0"
+project = project_name
+copyright = f"{datetime.now().year}, {author_info}"
+author = author_info
 
 # -- General configuration ---------------------------------------------------
 extensions = [
@@ -111,7 +124,6 @@ myst_enable_extensions = [
     "fieldlist",
     "html_admonition",
     "html_image",
-    "linkify",
     "replacements",
     "smartquotes",
     "substitution",

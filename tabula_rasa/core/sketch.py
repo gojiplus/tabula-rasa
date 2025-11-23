@@ -194,7 +194,9 @@ class AdvancedStatSketch:
                         "strength": (
                             "strong"
                             if abs(spearman_corr) > 0.7
-                            else "moderate" if abs(spearman_corr) > 0.4 else "weak"
+                            else "moderate"
+                            if abs(spearman_corr) > 0.4
+                            else "weak"
                         ),
                     }
 

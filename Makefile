@@ -4,30 +4,27 @@ help:  ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 install:  ## Install production dependencies
-	pip install -e .
+	uv sync
 
 install-dev:  ## Install development dependencies
-	pip install -e ".[dev]"
+	uv sync --group dev
 
 test:  ## Run tests with pytest
-	pytest tests/ -v --cov=tabula_rasa --cov-report=term-missing
+	uv run pytest tests/ -v --cov=tabula_rasa --cov-report=term-missing
 
 lint:  ## Run linting with ruff
-	ruff check tabula_rasa/ tests/
+	uv run ruff check .
 
-format:  ## Format code with black and ruff
-	ruff check --fix tabula_rasa/ tests/
-	black tabula_rasa/ tests/
-	isort tabula_rasa/ tests/
+format:  ## Format code with ruff
+	uv run ruff check --fix .
+	uv run ruff format .
 
-type-check:  ## Run type checking with mypy
-	mypy tabula_rasa
 
 pre-commit-install:  ## Install pre-commit hooks
-	pre-commit install
+	uv run pre-commit install
 
 pre-commit-run:  ## Run pre-commit hooks on all files
-	pre-commit run --all-files
+	uv run pre-commit run --all-files
 
 clean:  ## Clean up build artifacts and caches
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true

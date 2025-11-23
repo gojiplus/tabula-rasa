@@ -1,9 +1,8 @@
 """Example using a custom dataset."""
 
 import pandas as pd
-import torch
 
-from tabula_rasa import AdvancedQueryExecutor, AdvancedStatSketch, ProductionTableQA, Query
+from tabula_rasa import AdvancedQueryExecutor, AdvancedStatSketch, Query
 
 
 def main():
@@ -35,8 +34,12 @@ def main():
 
     print(f"   Table: {sketch['table_name']}")
     print(f"   Rows: {sketch['n_rows']}")
-    print(f"   Numeric columns: {len([c for c in sketch['columns'] if sketch['columns'][c]['type'] == 'numeric'])}")
-    print(f"   Categorical columns: {len([c for c in sketch['columns'] if sketch['columns'][c]['type'] == 'categorical'])}")
+    print(
+        f"   Numeric columns: {len([c for c in sketch['columns'] if sketch['columns'][c]['type'] == 'numeric'])}"
+    )
+    print(
+        f"   Categorical columns: {len([c for c in sketch['columns'] if sketch['columns'][c]['type'] == 'categorical'])}"
+    )
 
     # Show column statistics
     print("\n3. Column statistics:")

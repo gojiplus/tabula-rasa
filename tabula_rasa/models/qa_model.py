@@ -2,7 +2,7 @@
 
 import torch
 import torch.nn as nn
-from transformers import T5EncoderModel, T5Tokenizer
+from transformers import AutoModel, AutoTokenizer
 
 from .encoders import StatisticalEncoder
 
@@ -28,14 +28,16 @@ class ProductionTableQA(nn.Module):
         super().__init__()
 
         # T5 encoder for question understanding
-        self.tokenizer = T5Tokenizer.from_pretrained(model_name)
-        self.text_encoder = T5EncoderModel.from_pretrained(model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        t5_model = AutoModel.from_pretrained(model_name)
+        self.text_encoder = t5_model.encoder
+        self.text_config = t5_model.config
 
         # Statistical sketch encoder
         self.stat_encoder = StatisticalEncoder(output_dim=stat_dim)
 
         # Fusion layer (combine text + stats)
-        text_dim = self.text_encoder.config.d_model
+        text_dim = self.text_config.d_model
         self.fusion = nn.Sequential(
             nn.Linear(text_dim + stat_dim, stat_dim),
             nn.LayerNorm(stat_dim),
